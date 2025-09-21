@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <title>MotoX3M3</title>
+</head>
+<body>
+
+    <div id="content"></div>
+    <div id="orientation"></div>
+    <div id="loader">Loading ...</div>
+
+    <script type="text/javascript">
+        function showNextAd() {
+            console.log("showNextAd called");
+        }
+    </script>
+
+    <script src="assets/lib/jquery-3.1.1.min.js"></script>
+    <script src="assets/lib/nape.min.js"></script>
+    <script src="assets/lib/easeljs-0.8.2.combined.js"></script>
+    <script src="assets/lib/bluebird.min.js"></script>
+    <script src="assets/lib/phaser.min.js"></script>
+    <script src="assets/lib/phaser-cachebuster.min.js"></script>
+    <script src="assets/lib/phaser-super-storage.min.js"></script>
+    <script src="assets/lib/dragonBones.min.js"></script>
+    <script src="motox3m3.min.js?ab3b0af36e99447a1a6d"></script>
+
+    <script type="text/javascript">
+        (function() {
+            var checkInterval = setInterval(function() {
+                var canvas = document.querySelector("#content canvas");
+                var game = window.game;
+
+                if (canvas) {
+                    canvas.setAttribute('willReadFrequently', 'true');
+                }
+
+                if (game && game.isBooted && canvas) {
+                    clearInterval(checkInterval);
+
+                    canvas.focus();
+
+                    function resumeAudio() {
+                        if (game.sound && game.sound.context && game.sound.context.state === 'suspended') {
+                            game.sound.context.resume();
+                        }
+                        document.body.removeEventListener('click', resumeAudio);
+                        document.body.removeEventListener('touchstart', resumeAudio);
+                    }
+                    document.body.addEventListener('click', resumeAudio, true);
+                    document.body.addEventListener('touchstart', resumeAudio, true);
+                }
+            }, 100);
+        })();
+    </script>
+
+</body>
+</html>
